@@ -1,17 +1,11 @@
 const person = {
-    'first-name': 'Marek',
-    lastName: 'Matczak',
-    id: 0
-}
+    firstName: 'John',
+    lastName: 'Example',
+    age: 30,
 
-// const propName = 'firstName'
+    letMeIntroduceMyself() {
+        return `My name is ${this.firstName} ${this.lastName}`;
+    }
+};
 
-// falsy
-// false, null, undefined, 0, '', NaN
-
-person['first-name'] = 'Czarek';
-person.age = 33;
-
-delete person.age;
-
-console.log(person);
+console.log(person.letMeIntroduceMyself());
