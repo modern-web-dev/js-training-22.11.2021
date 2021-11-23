@@ -5,8 +5,22 @@ class Employee {
     }
 }
 
+class EmployeeService {
+    id = 0;
+
+    save(employee) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({...employee, id: this.id++})
+            }, 2000);
+        });
+
+    }
+}
+
 class EmployeeCtrl {
-    constructor() {
+    constructor(employees) {
+        this.employees = employees;
         const employeeForm = document.querySelector('form');
         this.firstNameInput = employeeForm.querySelector('#firstName');
         this.lastNameInput = employeeForm.querySelector('#lastName');
@@ -18,19 +32,15 @@ class EmployeeCtrl {
         );
     }
 
-    // A - apply
-    // B - bind
-    // C - call
-
     saveEmployee() {
-        console.log(
-            new Employee(this.firstNameInput.value, this.lastNameInput.value));
+        this.employees.save(
+            new Employee(this.firstNameInput.value, this.lastNameInput.value))
+            .then(savedEmployee => console.log(savedEmployee));
     }
 }
 
-const controller = new EmployeeCtrl();
-// controller.firstNameInput.value = 'Marek';
-// controller.saveEmployee();
+const employees = new EmployeeService();
+const controller = new EmployeeCtrl(employees);
 
 // data goes down, events go up!
 
